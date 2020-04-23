@@ -1,19 +1,27 @@
 #!/usr/bin/env python3
 import boto3
-import xlrd 
+import xlrd
 
-def create_instances(ami_image_id, instance_type):
+def create_instances():
     ec2 = boto3.resource('ec2')
     instance = ec2.create_instances(
-    ImageId=ami_image_id,
+    ImageId='ami-097834fcb3081f51a',
     MinCount=1,
     MaxCount=1,
-    InstanceType=instance_type)
+    InstanceType='t3.2xlarge')
     print (instance[0].id)
+    instance_id = list_instances()
+    if instance_id != None:
+        continue
+    else:
+        create_instances()
+    return instance_id
+
 
 def list_instances():
     ec2 = boto3.resource('ec2')
     for instance in ec2.instances.all():
+        print (instance.id, instance.state)
     return (instance.id, instance.state)
 
 def terminate_instances(instance_id):
@@ -35,12 +43,8 @@ def configure_credentials():
     os.system("text")
 
 configure_credentials()
-
-do {
-    create_instances (ami-097834fcb3081f51a, t3.2xlarge)
-    instance_id = list_instances()
-} while ( list_instances() = None )
-
+instance_id = create_instances()
+        
 # This doesn't work globally, figuring out ansible
 os.system('pkg install git')
 os.system('cd')
