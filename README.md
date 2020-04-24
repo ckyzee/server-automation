@@ -3,6 +3,13 @@
 Due to time limitation, I cannot finish the project and here are the lists of what have been finished and what have not. Please feel free to reach out if you have any question.
 
 ## Server
+
+```
+
+python3 server_start.py
+
+```
+
 * Getting AWS credentials - Done
 * Creating instance - Done
 * Setup the system using Ansible
@@ -10,6 +17,13 @@ Due to time limitation, I cannot finish the project and here are the lists of wh
 * Install and configure nginx
 
 ## Build Infrastructure
+
+```
+
+python3 build_infrastructure.py
+
+```
+
 * Getting AWS credentials - Done
 * Creating instance - Done
 * Setup the system using Ansible
