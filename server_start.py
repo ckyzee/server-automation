@@ -29,7 +29,7 @@ def terminate_instances(instance_id):
     print (response)
 
 def configure_credentials():
-    file = open("demofile.txt", "r")
+    file = open("~/.aws-credentials", "r")
     access_key = file.readline()
     secret_key = file.readline()
     file.close()
