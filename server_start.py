@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 import boto3
-import xlrd 
+import os
 
-def create_instances(ami_image_id, instance_type):
+def create_instances():
     ec2 = boto3.resource('ec2')
     instance = ec2.create_instances(
-    ImageId=ami_image_id,
+    ImageId='ami-097834fcb3081f51a',
     MinCount=1,
     MaxCount=1,
-    InstanceType=instance_type)
+    InstanceType='t2.micro')
     print (instance[0].id)
+    instance_id = list_instances()
+    if instance_id == None:
+        create_instances()
+    return instance_id
+
 
 def list_instances():
     ec2 = boto3.resource('ec2')
     for instance in ec2.instances.all():
+        print (instance.id, instance.state)
     return (instance.id, instance.state)
 
 def terminate_instances(instance_id):
@@ -23,22 +29,18 @@ def terminate_instances(instance_id):
     print (response)
 
 def configure_credentials():
-    file = xlrd.open_workbook("./accessKeys.csv.xlsx") 
-    sheet = file.sheet_by_index(0) 
-    sheet.cell_value(0, 0) 
-    keys = sheet.row_values(1)
-    region = raw_input("Enter the Region:")
+    file = open("demofile.txt", "r")
+    access_key = file.readline()
+    secret_key = file.readline()
+    file.close()
+
+    region = input("Enter the Region:")
     os.system('aws configure')
-    os.system(keys[0])
-    os.system(keys[1])
+    os.system(access_key)
+    os.system(secret_key)
     os.system(region)
     os.system("text")
 
 configure_credentials()
 
-do {
-    create_instances (ami-097834fcb3081f51a, t2.micro)
-    instance_id = list_instances()
-} while ( list_instances() = None )
-
-# Figuring out ansible
+instance_id = create_instances()
