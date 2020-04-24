@@ -24,7 +24,7 @@ def list_instances():
 
 def terminate_instances(instance_id):
     ec2 = boto3.resource('ec2')
-    instance = ec2.instance(instance_id)
+    instance = ec2.Instance(instance_id)
     response = instance.terminate()
     print (response)
 
