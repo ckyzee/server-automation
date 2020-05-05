@@ -1,7 +1,5 @@
 # server-automation
 
-Due to time limitation, I cannot finish the project and here are the lists of what have been finished and what have not. Please feel free to reach out if you have any question.
-
 ## Server
 
 ```
